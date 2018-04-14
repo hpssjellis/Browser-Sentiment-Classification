@@ -11,9 +11,9 @@
  <div id="myDiv01">...</div>
  
  <input type=button value="Check" onclick="{
-    alert(document.getElementById('myInput').value)
+
     init()
-     document.getElementById('myDiv01').innerHTML = 'wow'                                     
+                                    
 }">
  
  
@@ -82,7 +82,7 @@ function create_sequences(txt)
 
 async function init(model)
 {
-    txt  = "awesome movie"
+    txt  =     alert(document.getElementById('myInput').value)
     console.log('Start loading dicionary')
     await loadDict()
     //console.log(word_index)
@@ -95,6 +95,9 @@ async function init(model)
     input = input.expandDims(0)
     pred = model.predict(input)
     pred.print()
+    if (pred >=0.5){document.getElementById('myDiv01').innerHTML = 'Wow Positive review'}
+        else {document.getElementById('myDiv01').innerHTML ='Kind of negative' }
+    
 }
 
 word_index = undefined
