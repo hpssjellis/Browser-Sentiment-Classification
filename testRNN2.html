@@ -117,9 +117,15 @@ async function init(model)
     
     }
     seq = create_sequences(txt) 
+ 
+ 
     console.log('Start loading model') 
     model = await createModel()
     console.log('Finish loading model') 
+ 
+ 
+ 
+ 
     input = tf.tensor(seq)
     input = input.expandDims(0)
     pred = model.predict(input)
