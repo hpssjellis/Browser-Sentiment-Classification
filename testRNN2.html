@@ -114,14 +114,11 @@ async function init(model)
     await loadDict()
     //console.log(word_index)
     console.log('Finish loading dicionary')
-    
-    }
- 
- 
+     
     console.log('Start loading model') 
     model = await createModel()
     console.log('Finish loading model') 
- 
+    }
  
  
     seq = create_sequences(txt) 
