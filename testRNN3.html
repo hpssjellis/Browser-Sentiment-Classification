@@ -150,7 +150,7 @@ async function init(model)
     console.log('Finish loading dicionary')
      
     console.log('Start loading model') 
-    model = await createModel()
+    document.model = await createModel()
     console.log('Finish loading model') 
 
     document.getElementById('myDiv01').innerHTML ='Done'
@@ -159,7 +159,7 @@ async function init(model)
  
     input = tf.tensor(seq)
     input = input.expandDims(0)
-    pred = model.predict(input)
+    pred = document.model.predict(input)
     pred.print()
 
 }
