@@ -6,11 +6,11 @@
 </head>
 <body>
  
- <textarea id="myInput" rows=4 cols=70>Awesome movvie</textarea>
+ <textarea id="myInput" rows=4 cols=70>Awesome movie. The characters werre rad</textarea>
  
  <div id="myDiv01">...</div>
  
- <input type=button value="Check" onclick="{
+ <input type=button value="Check Movie Review" onclick="{
 
     init()
                                     
@@ -82,7 +82,7 @@ function create_sequences(txt)
 
 async function init(model)
 {
-    txt  =     alert(document.getElementById('myInput').value)
+    txt  =     document.getElementById('myInput').value
     console.log('Start loading dicionary')
     await loadDict()
     //console.log(word_index)
