@@ -102,14 +102,12 @@ async function init(model)
     
 }
 
-myRunOnce = true 
+
  
 async function init(model)
 {
     txt  =     document.getElementById('myInput').value
-    
-    if (myRunOnce){
-    myRunOnce = true   // just testing
+
     console.log('Start loading dicionary')
     await loadDict()
     //console.log(word_index)
@@ -117,10 +115,7 @@ async function init(model)
      
     console.log('Start loading model') 
     model = await createModel()
-    console.log('Finish loading model') 
-    }
- 
- 
+    console.log('Finish loading model')  
     seq = create_sequences(txt) 
  
     input = tf.tensor(seq)
@@ -132,8 +127,31 @@ async function init(model)
     
 }
 
- 
+ async function initTrue(model)
+{
+    txt  =     document.getElementById('myInput').value
 
+    console.log('Start loading dicionary')
+    await loadDict()
+    //console.log(word_index)
+    console.log('Finish loading dicionary')
+     
+    console.log('Start loading model') 
+    model = await createModel()
+    console.log('Finish loading model') 
+
+ 
+ 
+    seq = create_sequences('Fred') 
+ 
+    input = tf.tensor(seq)
+    input = input.expandDims(0)
+    pred = model.predict(input)
+    pred.print()
+
+}
+
+initTrue()
  
  
 word_index = undefined
