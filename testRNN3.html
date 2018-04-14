@@ -112,28 +112,15 @@ async function init(model)
 
 
  
-async function init(model)
+async function mySentiment(model)
 {
-    txt  =     document.getElementById('myInput').value
-
- //   console.log('Start loading dicionary')
- //   await loadDict()
-
-  //  console.log('Finish loading dicionary')
-     
-  //  console.log('Start loading model') 
-  //  document.model = await createModel()
-   // console.log('Finish loading model')  
- 
- 
- 
- 
+    txt  =     document.getElementById('myInput').value 
     seq = create_sequences(txt) 
  
     input = tf.tensor(seq)
     input = input.expandDims(0)
     pred = document.model.predict(input)
-    pred.print()
+    //pred.print()
     if (pred.dataSync() >= 0.5){document.getElementById('myDiv01').innerHTML = 'Wow a positive review '+ (pred.dataSync() * 100).toFixed(0) + '%<br>'}
         else {document.getElementById('myDiv01').innerHTML ='Kind of negative '+ (pred.dataSync() * 100).toFixed(0) + '%<br>'}
     
@@ -143,19 +130,18 @@ async function init(model)
 {
     txt  =     document.getElementById('myInput').value
 
-    console.log('Start loading dicionary')
+    //console.log('Start loading dicionary')
     document.getElementById('myDiv01').innerHTML ='Loading, wait a bit'
     await loadDict()
 
-    console.log('Finish loading dicionary')
+    //console.log('Finish loading dicionary')
      
-    console.log('Start loading model') 
+    //console.log('Start loading model') 
     document.model = await createModel()
-    console.log('Finish loading model') 
+    //console.log('Finish loading model') 
 
     document.getElementById('myDiv01').innerHTML ='Done'
- 
-    seq = create_sequences('Fred') 
+    seq = create_sequences('Love') 
  
     input = tf.tensor(seq)
     input = input.expandDims(0)
