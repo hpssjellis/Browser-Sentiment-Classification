@@ -95,14 +95,23 @@ async function mySentiment(model)
     
 }
 
+ 
+function myDots(){
+  document.myInterval = setInterval('document.getElementById(\'myDiv01\').innerHTML += \'.\'', 100);  // every 1/10 second add a dot
+  
+ }
+ 
+ 
+ 
+ 
  async function initTrue(model)
 {
     txt  =     document.getElementById('myInput').value
 
     //console.log('Start loading dicionary')
-    document.getElementById('myDiv01').innerHTML ='Loading, wait a bit'
-    myInterval = setInterval('document.getElementById(\'myDiv01\').innerHTML += \'.\'', 100);  // every 1/10 second add a dot
-    await loadDict()
+     document.getElementById('myDiv01').innerHTML ='Loading, wait a bit'
+     myDots()    // add some dots
+     await loadDict()
 
     //console.log('Finish loading dicionary')
      
@@ -110,7 +119,7 @@ async function mySentiment(model)
     document.model = await createModel()
     //console.log('Finish loading model') 
  
-    clearInterval(myInterval)   //  stop adding dots
+    clearInterval(document.myInterval)   //  stop adding dots
     document.getElementById('myDiv01').innerHTML ='Done'
     seq = create_sequences('Love')                                    // just a testing run
  
