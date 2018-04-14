@@ -116,7 +116,6 @@ async function init(model)
     console.log('Finish loading dicionary')
     
     }
-    seq = create_sequences(txt) 
  
  
     console.log('Start loading model') 
@@ -125,6 +124,7 @@ async function init(model)
  
  
  
+    seq = create_sequences(txt) 
  
     input = tf.tensor(seq)
     input = input.expandDims(0)
@@ -136,7 +136,7 @@ async function init(model)
 }
 
  
- init()
+
  
  
 word_index = undefined
