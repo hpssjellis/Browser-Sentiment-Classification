@@ -95,8 +95,8 @@ async function init(model)
     input = input.expandDims(0)
     pred = model.predict(input)
     pred.print()
-    if (pred.dataSync() >=0.5){document.getElementById('myDiv01').innerHTML = 'Wow Positive review '+ (pred.dataSync() * 100) + '%'}
-        else {document.getElementById('myDiv01').innerHTML ='Kind of negative+ (pred.dataSync() * 100) + '%'}
+    if (pred.dataSync() >= 0.5){document.getElementById('myDiv01').innerHTML = 'Wow a positive review '+ (pred.dataSync() * 100) + '%<br>'}
+        else {document.getElementById('myDiv01').innerHTML ='Kind of negative '+ (pred.dataSync() * 100) + '%<br>'}
     
 }
 
