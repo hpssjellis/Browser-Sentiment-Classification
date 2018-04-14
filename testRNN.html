@@ -2,20 +2,20 @@
 <html>
 <head>
  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.9.0"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
  
- <h1 align=center> Movie reivvew</h1>
+ <h1 align=center> Movie reivew</h1>
  Original by   Zaid Alyafeai  <a href="https://github.com/zaidalyafeai/Browser-Sentiment-Classification">https://github.com/zaidalyafeai/Browser-Sentiment-Classification</a><br><br>
- <textarea id="myInput" rows=4 cols=70>Awesome movie. The characters werre rad</textarea><br><br>
+ 
+ 
+ <textarea id="myInput" rows=4 cols=70>Awesome movie. The characters were really rad</textarea><br><br>
  
  <div id="myDiv01" style="font-size:25px">...</div><br><br>
  
  <input type=button value="Check Movie Review" onclick="{
-
-    init()
-                                    
+    mySentiment()                                    
 }">
  
  
@@ -85,47 +85,74 @@ function create_sequences(txt)
 async function init(model)
 {
     txt  =     document.getElementById('myInput').value
-    console.log('Start loading dicionary')
-    await loadDict()
-    //console.log(word_index)
-    console.log('Finish loading dicionary')
+  
+ 
+ 
+//    console.log('Start loading dicionary')
+ //   await loadDict()
+ //   console.log('Finish loading dicionary')
+ 
+ 
+ 
+ //   console.log('Start loading model') 
+ //   document.model = await createModel()
+ //   console.log('Finish loading model') 
+ 
+ 
+ 
     seq = create_sequences(txt) 
-    console.log('Start loading model') 
-    model = await createModel()
-    console.log('Finish loading model') 
     input = tf.tensor(seq)
     input = input.expandDims(0)
-    pred = model.predict(input)
+    pred = document.model.predict(input)
     pred.print()
     if (pred.dataSync() >= 0.5){document.getElementById('myDiv01').innerHTML = 'Wow a positive review '+ (pred.dataSync() * 100) + '%<br>'}
         else {document.getElementById('myDiv01').innerHTML ='Kind of negative '+ (pred.dataSync() * 100) + '%<br>'}
     
 }
 
+
  
+async function mySentiment(model)
+{
+    txt  =     document.getElementById('myInput').value 
+    seq = create_sequences(txt) 
  
-async function init(model)
+    input = tf.tensor(seq)
+    input = input.expandDims(0)
+    pred = document.model.predict(input)
+    //pred.print()
+    if (pred.dataSync() >= 0.5){document.getElementById('myDiv01').innerHTML = 'Wow a positive review '+ (pred.dataSync() * 100).toFixed(0) + '%<br>'}
+        else {document.getElementById('myDiv01').innerHTML ='Kind of negative '+ (pred.dataSync() * 100).toFixed(0) + '%<br>'}
+    
+}
+
+ async function initTrue(model)
 {
     txt  =     document.getElementById('myInput').value
-    console.log('Start loading dicionary')
+
+    //console.log('Start loading dicionary')
+    document.getElementById('myDiv01').innerHTML ='Loading, wait a bit'
+    myInterval = setInterval('document.getElementById(\'myDiv01\').innerHTML += \'.\'', 100);  // every 1/10 second add a dot
     await loadDict()
-    //console.log(word_index)
-    console.log('Finish loading dicionary')
-    seq = create_sequences(txt) 
-    console.log('Start loading model') 
-    model = await createModel()
-    console.log('Finish loading model') 
+
+    //console.log('Finish loading dicionary')
+     
+    //console.log('Start loading model') 
+    document.model = await createModel()
+    //console.log('Finish loading model') 
+ 
+    clearInterval(myInterval)   //  stop adding dots
+    document.getElementById('myDiv01').innerHTML ='Done'
+    seq = create_sequences('Love') 
+ 
     input = tf.tensor(seq)
     input = input.expandDims(0)
-    pred = model.predict(input)
+    pred = document.model.predict(input)
     pred.print()
-    if (pred.dataSync() >= 0.5){document.getElementById('myDiv01').innerHTML = 'Wow a positive review '+ (pred.dataSync() * 100) + '%<br>'}
-        else {document.getElementById('myDiv01').innerHTML ='Kind of negative '+ (pred.dataSync() * 100) + '%<br>'}
-    
+
 }
 
- 
- 
+initTrue()
  
  
 word_index = undefined
