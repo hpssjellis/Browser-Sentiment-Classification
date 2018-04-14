@@ -6,9 +6,11 @@
 </head>
 <body>
  
- <textarea id="myInput" rows=4 cols=70>Awesome movie. The characters werre rad</textarea>
+ <h1 align=center> Movie reivvew</h1>
+ Original by   Zaid Alyafeai  <a href="https://github.com/zaidalyafeai/Browser-Sentiment-Classification">https://github.com/zaidalyafeai/Browser-Sentiment-Classification</a><br><br>
+ <textarea id="myInput" rows=4 cols=70>Awesome movie. The characters werre rad</textarea><br><br>
  
- <div id="myDiv01">...</div>
+ <div id="myDiv01" style="font-size:25px">...</div><br><br>
  
  <input type=button value="Check Movie Review" onclick="{
 
@@ -100,6 +102,32 @@ async function init(model)
     
 }
 
+ 
+ 
+async function init(model)
+{
+    txt  =     document.getElementById('myInput').value
+    console.log('Start loading dicionary')
+    await loadDict()
+    //console.log(word_index)
+    console.log('Finish loading dicionary')
+    seq = create_sequences(txt) 
+    console.log('Start loading model') 
+    model = await createModel()
+    console.log('Finish loading model') 
+    input = tf.tensor(seq)
+    input = input.expandDims(0)
+    pred = model.predict(input)
+    pred.print()
+    if (pred.dataSync() >= 0.5){document.getElementById('myDiv01').innerHTML = 'Wow a positive review '+ (pred.dataSync() * 100) + '%<br>'}
+        else {document.getElementById('myDiv01').innerHTML ='Kind of negative '+ (pred.dataSync() * 100) + '%<br>'}
+    
+}
+
+ 
+ 
+ 
+ 
 word_index = undefined
 
 
