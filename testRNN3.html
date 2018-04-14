@@ -85,17 +85,25 @@ function create_sequences(txt)
 async function init(model)
 {
     txt  =     document.getElementById('myInput').value
-    console.log('Start loading dicionary')
-    await loadDict()
-    //console.log(word_index)
-    console.log('Finish loading dicionary')
+  
+ 
+ 
+//    console.log('Start loading dicionary')
+ //   await loadDict()
+ //   console.log('Finish loading dicionary')
+ 
+ 
+ 
+ //   console.log('Start loading model') 
+ //   document.model = await createModel()
+ //   console.log('Finish loading model') 
+ 
+ 
+ 
     seq = create_sequences(txt) 
-    console.log('Start loading model') 
-    model = await createModel()
-    console.log('Finish loading model') 
     input = tf.tensor(seq)
     input = input.expandDims(0)
-    pred = model.predict(input)
+    pred = document.model.predict(input)
     pred.print()
     if (pred.dataSync() >= 0.5){document.getElementById('myDiv01').innerHTML = 'Wow a positive review '+ (pred.dataSync() * 100) + '%<br>'}
         else {document.getElementById('myDiv01').innerHTML ='Kind of negative '+ (pred.dataSync() * 100) + '%<br>'}
@@ -108,14 +116,14 @@ async function init(model)
 {
     txt  =     document.getElementById('myInput').value
 
-//    console.log('Start loading dicionary')
-//    await loadDict()
+    console.log('Start loading dicionary')
+    await loadDict()
 
-//    console.log('Finish loading dicionary')
+    console.log('Finish loading dicionary')
      
-//    console.log('Start loading model') 
-//    model = await createModel()
- //   console.log('Finish loading model')  
+    console.log('Start loading model') 
+    document.model = await createModel()
+    console.log('Finish loading model')  
  
  
  
@@ -124,7 +132,7 @@ async function init(model)
  
     input = tf.tensor(seq)
     input = input.expandDims(0)
-    pred = model.predict(input)
+    pred = document.model.predict(input)
     pred.print()
     if (pred.dataSync() >= 0.5){document.getElementById('myDiv01').innerHTML = 'Wow a positive review '+ (pred.dataSync() * 100).toFixed(0) + '%<br>'}
         else {document.getElementById('myDiv01').innerHTML ='Kind of negative '+ (pred.dataSync() * 100).toFixed(0) + '%<br>'}
