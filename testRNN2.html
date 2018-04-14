@@ -8,7 +8,7 @@
  
  <h1 align=center> Movie reivew</h1>
  Original by   Zaid Alyafeai  <a href="https://github.com/zaidalyafeai/Browser-Sentiment-Classification">https://github.com/zaidalyafeai/Browser-Sentiment-Classification</a><br><br>
- <textarea id="myInput" rows=4 cols=70>Awesome movie. The characters werre rad</textarea><br><br>
+ <textarea id="myInput" rows=4 cols=70>Awesome movie. The characters were really rad</textarea><br><br>
  
  <div id="myDiv01" style="font-size:25px">...</div><br><br>
  
@@ -109,7 +109,7 @@ async function init(model)
     txt  =     document.getElementById('myInput').value
     
     if (myRunOnce){
-    myRunOnce = false
+    myRunOnce = true   // just testing
     console.log('Start loading dicionary')
     await loadDict()
     //console.log(word_index)
