@@ -11,8 +11,9 @@
  <div id="myDiv01">...</div>
  
  <input type=button value="Check" onclick="{
-    alert('hi')
-                                           
+    alert(document.getElementById('myInput').value)
+    init()
+     document.getElementById('myDiv01').innerHTML = 'wow'                                     
 }">
  
  
@@ -97,7 +98,7 @@ async function init(model)
 }
 
 word_index = undefined
-init()
+
 
 </script>
 </body>
